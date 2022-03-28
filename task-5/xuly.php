@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: text/html; charset=utf-8');
 
-$conn = mysqli_connect('127.0.0.1', 'root', '', 'register') or die ('Lỗi kết nối'); mysqli_set_charset($conn, "utf8");
+$conn = mysqli_connect('127.0.0.1', 'root', '', 'data1') or die ('Lỗi kết nối'); mysqli_set_charset($conn, "utf8");
 
 if(isset($_POST['dangdy'])){
 	$username = trim($_POST['username']);
@@ -31,7 +31,7 @@ if(isset($_POST['dangdy'])){
 
 		die();
 	}else{
-		$sql = "INSERT INTO member (username, password, email, phone) VALUES ('$username','$password','$email','$phone')";
+		$sql = "INSERT INTO member (username, password, phone, email) VALUES ('$username','$password','$phone','$email')";
 		echo '<script language="javascript">alert("Đăng ký thành công!"); window.location="register.php";</script>';
 
 		if(mysql_query($conn, $sql)){
