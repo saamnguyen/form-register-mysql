@@ -1,11 +1,17 @@
-.form {
- width: 300px;
- border: 1px solid green;
- padding: 20px;
- margin: 0 auto;
- font-weight: 700px;
-}
+
 .form input {
  width: 100%;
  padding: 10px 0;
+}
+.btn{
+    margin-top: 10px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
 }
