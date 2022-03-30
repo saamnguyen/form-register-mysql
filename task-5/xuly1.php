@@ -16,7 +16,7 @@ if(isset($_POST['dangnhap'])){
 
 	// $password = md5($password);
 
-	$query = "SELECT username, password FROM member WHERE username='$username'";
+	$query = "SELECT * FROM member WHERE username='$username'";
 
 	$result = mysqli_query($connect, $query) or die( mysqli_error($connect));
 
@@ -31,7 +31,8 @@ if(isset($_POST['dangnhap'])){
 		echo "Mat khau khong dung";
 		exit();
 	}else{
-		echo '<script language="javascript">alert("Dang nhap thanh cong"); window.location="login.php";</script>';
+		echo '<script language="javascript">alert("Dang nhap thanh cong"); </script>';
+		echo "<script>console.log('Objects: " .json_encode($row) . "' );</script>";
 	}
 
 	$_SESSION['username'] = $username;
