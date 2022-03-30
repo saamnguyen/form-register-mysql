@@ -1,4 +1,6 @@
 <?php 
+
+//Dang ky
 header('Content-Type: text/html; charset=utf-8');
 
 $conn = new mysqli('127.0.0.1:3306', 'root', '', 'data1') or die ('Lỗi kết nối'); mysqli_set_charset($conn, "utf8");
@@ -50,5 +52,7 @@ if(isset($_POST['dangdy'])){
 		}
 	}
 }
+
+
 
 ?>
