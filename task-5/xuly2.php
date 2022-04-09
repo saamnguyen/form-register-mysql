@@ -7,10 +7,15 @@ if(isset($_POST['find'])){
 
 	include('connect.php');
 
-	$id = addslashes($_POST['text']);
+	$id = trim($_POST['text']);
 
-	$query  = "SELECT username, id FROM member WHERE id = '$id';";
-	$result = mysqli_query($connect,  $query ) or die( '<pre>' . ((is_object($connect)) ? mysqli_error($connect) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );
+	// $query  = "SELECT username, id FROM member WHERE id = '$id';";
+	// $result = mysqli_real_escape_string($connect, $query) or die( mysqli_error($connect));
+
+	$query = sprintf("SELECT username, id FROM member WHERE id = '$id'",mysqli_real_escape_string($connect, $id));
+	$result = mysqli_query($connect, $query);
+	printf("Select returned %d rows.\n", mysqli_num_rows($result));
+
 
 	// Get results
 			while( $row = mysqli_fetch_assoc( $result ) ) {
@@ -19,7 +24,7 @@ if(isset($_POST['find'])){
 				$last  = $row["id"];
 
 				// Feedback for end user
-				$html = "<pre>ID: {$id}<br />Username: {$first}<br />ID: {$last}</pre>";
+				$html .= "<pre>ID: {$id}<br />Username: {$first}<br />ID: {$last}</pre>";
 
 			}
 			echo $html;
