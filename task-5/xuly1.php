@@ -37,9 +37,11 @@ if(isset($_POST['dangnhap'])){
 
 	$_SESSION['username'] = $username;
 	echo "Xin chao <b>" .$username. "</b>. Ban da dang nhap thanh cong";
+	session_commit();
+	header('Location: index.php');
 	die();
 
-	$conn->close();
+	$connect->close();
 
 }
 ?>
