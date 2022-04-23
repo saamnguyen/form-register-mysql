@@ -11,9 +11,20 @@ if(isset($_POST["submit"])){
 
 	if($check !== false){
 		echo "File is an image - " . $check["mime"] . ".";
+		echo "<br>";
 	}else{
 		echo "File is not an image";
 		$uploadOk = 0;
+	}
+}
+
+if($uploadOk == 0){
+	echo "Xin loi, file cua ban khong upload duoc!!!";
+}else{
+	if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+		echo "File ". htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " da duoc upload!!!";
+	}else{
+		echo "Sorry, there was an error uploading your file.";
 	}
 }
 ?>
