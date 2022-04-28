@@ -9,22 +9,31 @@ $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 if(isset($_POST["submit"])){
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
-	if($check !== false){
-		echo "File is an image - " . $check["mime"] . ".";
-		echo "<br>";
+	$uploaded_name = $_FILES['fileToUpload']['name'];
+	$uploaded_type = $_FILES['fileToUpload']['type'];
+	$uploaded_size = $_FILES['fileToUpload']['size'];
+
+	//Check image?
+	if(($uploaded_type == "image/jpeg" || $uploaded_type == "image/png") && ($uploaded_size < 100000)){
+
+		if(!move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+			echo "Sorry, there was an error uploading your file.";
+		}
+		else{
+			echo "File ". htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " da duoc upload!!!";
+		}
 	}else{
-		echo "File is not an image";
-		$uploadOk = 0;
-	}
+	echo "Sorry, there was an error uploading your file.";
+}
 }
 
-if($uploadOk == 0){
-	echo "Xin loi, file cua ban khong upload duoc!!!";
-}else{
-	if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
-		echo "File ". htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " da duoc upload!!!";
-	}else{
-		echo "Sorry, there was an error uploading your file.";
-	}
-}
+// if($uploadOk == 0){
+// 	echo "Xin loi, file cua ban khong upload duoc!!!";
+// }else{
+// 	if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+// 		echo "File ". htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " da duoc upload!!!";
+// 	}else{
+// 		echo "Sorry, there was an error uploading your file.";
+// 	}
+// }
 ?>
