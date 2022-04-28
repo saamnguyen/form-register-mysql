@@ -10,11 +10,13 @@ if(isset($_POST["submit"])){
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
 	$uploaded_name = $_FILES['fileToUpload']['name'];
+	$uploaded_ext = substr($uploaded_name, strrpos($uploaded_name, ".") + 1);
 	$uploaded_type = $_FILES['fileToUpload']['type'];
 	$uploaded_size = $_FILES['fileToUpload']['size'];
+	$uploaded_tmp = $_FILES['fileToUpload']['tmp_name'];
 
 	//Check image?
-	if(($uploaded_type == "image/jpeg" || $uploaded_type == "image/png") && ($uploaded_size < 100000)){
+	if(($uploaded_type == "image/jpeg" || $uploaded_type == "image/png") && ($uploaded_size < 100000) && (getimagesize($uploaded_tmp))){
 
 		if(!move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
 			echo "Sorry, there was an error uploading your file.";
